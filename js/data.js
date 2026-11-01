@@ -16,6 +16,13 @@ export const uiStrings = {
     ariaCopy: "Copy phone number",
     ariaShare: "Share contact",
     ariaMap: "Show on map",
+    confidenceLabel: "Confidence",
+    demandLabel: "Demand",
+    waitLabel: "Wait",
+    bestTimeLabel: "Best time",
+    feedbackPrompt: "Was this suggestion useful?",
+    feedbackUseful: "Useful",
+    feedbackNotUseful: "Not useful",
   },
   mr: {
     landingDesc:
@@ -32,6 +39,13 @@ export const uiStrings = {
     ariaCopy: "फोन नंबर कॉपी करा",
     ariaShare: "संपर्क शेअर करा",
     ariaMap: "नकाशावर दर्शवा",
+    confidenceLabel: "विश्वास पातळी",
+    demandLabel: "मागणी",
+    waitLabel: "प्रतीक्षा",
+    bestTimeLabel: "सर्वोत्तम वेळ",
+    feedbackPrompt: "ही सूचना उपयुक्त होती का?",
+    feedbackUseful: "उपयुक्त",
+    feedbackNotUseful: "उपयुक्त नाही",
   },
   hi: {
     landingDesc:
@@ -49,6 +63,13 @@ export const uiStrings = {
     ariaCopy: "फोन नंबर कॉपी करें",
     ariaShare: "संपर्क साझा करें",
     ariaMap: "नक्शे पर देखें",
+    confidenceLabel: "विश्वसनीयता",
+    demandLabel: "मांग",
+    waitLabel: "प्रतीक्षा",
+    bestTimeLabel: "सर्वोत्तम समय",
+    feedbackPrompt: "क्या यह सुझाव उपयोगी था?",
+    feedbackUseful: "उपयोगी",
+    feedbackNotUseful: "उपयोगी नहीं",
   },
 };
 

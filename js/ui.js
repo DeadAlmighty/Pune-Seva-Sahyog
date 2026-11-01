@@ -18,7 +18,16 @@ export const elements = {
   categoryTabsContainer: document.getElementById("categoryTabs"),
   starsContainer: document.getElementById("stars-container"),
   locationLoader: document.getElementById("locationLoader"),
+  mlInsightText: document.getElementById("mlInsightText"),
+  metricsText: document.getElementById("metricsText"),
 };
+
+function getChipClass(label) {
+  if (label === "High") return "chip chip-high";
+  if (label === "Medium") return "chip chip-medium";
+  if (label === "Low") return "chip chip-low";
+  return "chip";
+}
 
 export function renderList(contacts, currentLang) {
   elements.helplineList.innerHTML = "";
@@ -45,6 +54,18 @@ export function renderList(contacts, currentLang) {
       item.className =
         "glass-card p-5 rounded-xl flex flex-col justify-between reveal-on-scroll";
       const contactInfo = contact.translations[currentLang];
+      const ml = contact.ml || {};
+      const confidence = ml.confidence || "Low";
+      const demand = ml.demandLevel || "Unknown";
+      const waitHint = ml.waitLabel || "N/A";
+      const bestTime = ml.bestTimeHint || "Any time";
+      const confidenceLabel = uiStrings[currentLang].confidenceLabel || "Confidence";
+      const demandLabel = uiStrings[currentLang].demandLabel || "Demand";
+      const waitLabel = uiStrings[currentLang].waitLabel || "Wait";
+      const bestTimeLabel = uiStrings[currentLang].bestTimeLabel || "Best time";
+      const feedbackPrompt = uiStrings[currentLang].feedbackPrompt || "Was this suggestion useful?";
+      const usefulLabel = uiStrings[currentLang].feedbackUseful || "Useful";
+      const notUsefulLabel = uiStrings[currentLang].feedbackNotUseful || "Not useful";
       let distanceInfo =
         contact.distance && contact.distance !== Infinity
           ? `<p class="text-xs text-[var(--accent-color)] font-semibold">(${
@@ -78,8 +99,19 @@ export function renderList(contacts, currentLang) {
                   <i data-feather="map-pin" aria-hidden="true" class="w-4 h-4 mr-2 mt-1 flex-shrink-0"></i>
                   <p>${contactInfo.address}</p>
               </div>
+              <div class="mt-2">
+                  <span class="${getChipClass(confidence)}">${confidenceLabel}: ${confidence}</span>
+                  <span class="chip">${demandLabel}: ${demand}</span>
+                  <span class="chip">${waitLabel}: ${waitHint}</span>
+              </div>
+              <p class="text-xs text-[var(--text-secondary)] mt-2">${bestTimeLabel}: ${bestTime}</p>
+              <div class="mt-3">
+                 <p class="text-xs text-[var(--text-secondary)]">${feedbackPrompt}</p>
+                 <button class="feedback-btn mt-1" data-feedback="useful" data-service-name="${contactInfo.service}">${usefulLabel}</button>
+                 <button class="feedback-btn mt-1" data-feedback="not_useful" data-service-name="${contactInfo.service}">${notUsefulLabel}</button>
+              </div>
           </div>
-          <a href="tel:${contact.phone}" class="mt-4 w-full bg-teal-600 text-white font-bold py-3 px-5 rounded-lg flex items-center justify-center space-x-2 transition-colors hover:bg-indigo-600 focus:outline-none focus:ring-4 focus:ring-indigo-400 active:scale-95">
+          <a href="tel:${contact.phone}" data-service-name="${contactInfo.service}" class="call-btn mt-4 w-full bg-teal-600 text-white font-bold py-3 px-5 rounded-lg flex items-center justify-center space-x-2 transition-colors hover:bg-indigo-600 focus:outline-none focus:ring-4 focus:ring-indigo-400 active:scale-95">
               <i data-feather="phone-call" aria-hidden="true" stroke-width="2.5" width="20" height="20"></i>
               <span>${uiStrings[currentLang].call} ${contact.phone}</span>
           </a>`;
@@ -118,6 +150,14 @@ export function updateUIText(currentLang) {
     }
   });
   document.documentElement.lang = currentLang;
+}
+
+export function updateInsightPanel(text) {
+  if (elements.mlInsightText) elements.mlInsightText.textContent = text;
+}
+
+export function updateMetricsPanel(text) {
+  if (elements.metricsText) elements.metricsText.textContent = text;
 }
 
 export function setTheme(theme) {

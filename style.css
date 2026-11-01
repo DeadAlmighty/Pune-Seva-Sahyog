@@ -149,3 +149,33 @@ body {
 .action-icon:hover {
   background-color: var(--card-bg-hover);
 }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--card-border);
+  margin-right: 6px;
+  margin-top: 6px;
+}
+.chip-high {
+  color: #34d399;
+}
+.chip-medium {
+  color: #fbbf24;
+}
+.chip-low {
+  color: #f87171;
+}
+.feedback-btn {
+  font-size: 0.72rem;
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  padding: 4px 10px;
+  margin-right: 6px;
+}
+.feedback-btn:hover {
+  border-color: var(--accent-color);
+  color: var(--text-primary);
+}
